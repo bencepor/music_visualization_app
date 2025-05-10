@@ -11,8 +11,12 @@ import re
 load_dotenv()
 
 # Set up Spotify API credentials
-client_id = os.getenv("SPOTIPY_CLIENT_ID")
-client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
+client_id = st.secrets["SPOTIPY_CLIENT_ID"]
+client_secret = st.secrets["SPOTIPY_CLIENT_SECRET"]
+redirect_uri = st.secrets["REDIRECT_URI"]
+
+""" client_id = os.getenv("SPOTIPY_CLIENT_ID")
+client_secret = os.getenv("SPOTIPY_CLIENT_SECRET") """
 
 # Initialize Spotify client
 sp = None
