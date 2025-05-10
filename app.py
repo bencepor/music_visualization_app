@@ -7,29 +7,29 @@ import os
 from dotenv import load_dotenv
 import re
 
-# Load environment variables
-load_dotenv()
-
-# Set up Spotify API credentials
-client_id = st.secrets["SPOTIPY_CLIENT_ID"]
-client_secret = st.secrets["SPOTIPY_CLIENT_SECRET"]
-redirect_uri = st.secrets["REDIRECT_URI"]
-
-""" client_id = os.getenv("SPOTIPY_CLIENT_ID")
-client_secret = os.getenv("SPOTIPY_CLIENT_SECRET") """
-
-# Initialize Spotify client
-sp = None
-if client_id and client_secret:
-    client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
 # Set page config
 st.set_page_config(
     page_title="Music Visualization App",
     page_icon="🎵",
     layout="wide",
 )
+# Load environment variables
+if "SPOTIPY_CLIENT_ID" in st.secrets:
+    client_id = st.secrets["SPOTIPY_CLIENT_ID"]
+    client_secret = st.secrets["SPOTIPY_CLIENT_SECRET"]
+    redirect_uri = st.secrets["REDIRECT_URI"]
+else:
+    load_dotenv()
+    client_id = os.getenv("SPOTIPY_CLIENT_ID")
+    client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
+    redirect_uri = os.getenv("REDIRECT_URI")
+
+
+# Initialize Spotify client
+sp = None
+if client_id and client_secret:
+    client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Initialize session state
 if 'songs_data' not in st.session_state:
