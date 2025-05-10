@@ -61,7 +61,7 @@ def get_track_features(track_id):
         track_info = sp.track(track_id)
         
         # Get audio features
-        audio_features = sp.audio_features(track_id)[0]
+        audio_features = sp.audio_features([track_id])[0]
         
         # Combine the data
         track_data = {
