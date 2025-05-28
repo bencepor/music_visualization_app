@@ -8,7 +8,230 @@ st.set_page_config(
     page_title="Music Visualization App",
     page_icon="🎵",
     layout="wide",
+    initial_sidebar_state="collapsed"
 )
+
+# Add custom CSS for creative design
+st.markdown("""
+<style>
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
+
+/* Modern color scheme */
+:root {
+    --primary-color: #7C3AED;  /* Vibrant purple */
+    --secondary-color: #4F46E5; /* Indigo */
+    --accent-color: #EC4899;   /* Pink */
+    --text-color: #1F2937;    
+    --background-color: #F9FAFB;
+    --card-background: #FFFFFF;
+    --hover-color: #F3F4F6;
+    --selected-color: #EDE9FE;
+    --gradient-start: #7C3AED;
+    --gradient-end: #4F46E5;
+}
+
+/* Global styles */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Creative header styling */
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gradient-start), var(--gradient-end), transparent);
+    border-radius: 2px;
+}
+
+h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+/* Section headers with text-length underlines */
+.section-header {
+    border-bottom: none;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 100%;  /* Match text length */
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 1px;
+}
+
+/* Full-width section header */
+.full-width-header {
+    border-bottom: 2px solid var(--primary-color);
+    border-width: 100%;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    width: 200px;
+}
+
+/* Card-like containers */
+.stButton button {
+    width: 100%;
+    text-align: left;
+    background: var(--card-background);
+    border: 1px solid #E5E7EB;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stButton button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Song item styling */
+.song-item {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--card-background);
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.song-item:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.song-item.selected {
+    background-color: var(--selected-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Play/Pause button styling */
+.play-button {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Section dividers */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    margin: 2rem 0;
+}
+
+/* Info text styling */
+.info-text {
+    color: #6B7280;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Focus styles */
+button:focus, a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Add this to the CSS section at the top */
+.full-width-underline h2 {
+    border-bottom: 2px solid var(--primary-color);
+    width: 200%;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.player-divider {
+    border: none;
+    height: 2px;
+    background: #7C3AED;
+    margin: 2rem 0 1.5rem 0;
+}
+
+.no-underline h2 {
+    border-bottom: none !important;
+}
+
+.custom-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    color: #1F2937;
+    font-size: 2rem;
+    margin: 2rem 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #7C3AED;
+    width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Song data
 SONGS_DATA = {
@@ -82,48 +305,25 @@ def toggle_play(song_id):
         st.session_state.playing_song = song_id
 
 def main():
-    st.title("🎵 Music Visualization App")
+    # Creative header with gradient
+    st.markdown("""
+    <div style='text-align: center; margin-bottom: 2rem; margin-top: 0.5rem;'>
+        <h1>Music Explorer</h1>
+        <h2 style='font-size: 1.8rem; font-weight: 500; color: var(--text-color); margin-top: 0.5rem; font-family: "Space Grotesk", sans-serif; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.4;'>
+            Discover the emotional landscape of your favorite songs
+        </h2>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Create two columns
+    # Create two columns with custom styling
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        st.header("Available Songs")
-        
-        # Custom CSS for the song list
         st.markdown("""
-        <style>
-        .song-item {
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .song-item:hover {
-            background-color: #f0f2f6;
-        }
-        .song-item.selected {
-            background-color: #e6f3ff;
-            border-left: 3px solid #1f77b4;
-        }
-        .stButton button {
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .stButton button:hover {
-            background-color: #f0f2f6;
-        }
-        </style>
+        <h2 class='section-header'>Your Playlist</h2>
         """, unsafe_allow_html=True)
         
-        # Display song list
+        # Display song list with custom styling
         for song_id, song in SONGS_DATA.items():
             is_selected = song_id in st.session_state.selected_songs
             if st.button(
@@ -135,8 +335,10 @@ def main():
                 st.rerun()
     
     with col2:
-        st.header("Song Visualization")
-        st.write("**x-axis**: valence (musical positiveness), **y-axis**: energy, **color**: danceability, **size**: popularity")
+        st.markdown("""
+        <h2 class='section-header'>Emotional Map</h2>
+        <p class='info-text'>Explore how your songs relate to each other in terms of energy, mood, and danceability</p>
+        """, unsafe_allow_html=True)
         
         # Filter songs based on selection
         selected_songs_data = {k: v for k, v in SONGS_DATA.items() if k in st.session_state.selected_songs}
@@ -144,17 +346,17 @@ def main():
         # Create an empty DataFrame with the same structure when no songs are selected
         if not selected_songs_data:
             songs_df = pd.DataFrame({
-                'valence': [50],  # Add a dummy point in the middle
+                'valence': [50],
                 'energy': [50],
-                'danceability': [65],  # Middle of our color range
-                'popularity': [0],  # Make it invisible
+                'danceability': [65],
+                'popularity': [0],
                 'name': [''],
                 'artist': ['']
             })
         else:
             songs_df = pd.DataFrame.from_dict(selected_songs_data, orient='index')
         
-        # Create the scatter plot with Plotly
+        # Create the scatter plot with Plotly using creative styling
         fig = px.scatter(
             songs_df,
             x="valence",
@@ -164,14 +366,14 @@ def main():
             hover_name="name",
             hover_data=["artist", "danceability", "popularity"],
             color_continuous_scale=px.colors.sequential.Viridis,
-            size_max=30,
+            size_max=40,
             range_x=[0, 100],
             range_y=[0, 100],
             range_color=[50, 80],
-            title="Song Audio Features Visualization"
+            title=""
         )
         
-        # Update layout for a cleaner look
+        # Update layout for creative design
         fig.update_layout(
             height=600,
             xaxis_title="Valence (Musical Positiveness)",
@@ -179,21 +381,28 @@ def main():
             coloraxis_colorbar_title="Danceability",
             plot_bgcolor='white',
             paper_bgcolor='white',
+            font=dict(
+                family="Inter, sans-serif",
+                size=14,
+                color="#1F2937"
+            ),
             xaxis=dict(
                 showgrid=False,
                 zeroline=False,
                 showline=True,
                 linewidth=1,
-                linecolor='black',
-                range=[0, 100]
+                linecolor='#1F2937',
+                range=[0, 100],
+                tickfont=dict(size=12)
             ),
             yaxis=dict(
                 showgrid=False,
                 zeroline=False,
                 showline=True,
                 linewidth=1,
-                linecolor='black',
-                range=[0, 100]
+                linecolor='#1F2937',
+                range=[0, 100],
+                tickfont=dict(size=12)
             ),
             coloraxis=dict(
                 colorbar=dict(
@@ -205,8 +414,18 @@ def main():
                     tickmode='array',
                     tickvals=[50, 60, 70, 80],
                     ticktext=['50', '60', '70', '80'],
-                    ticks="outside"
+                    ticks="outside",
+                    tickfont=dict(size=12)
                 )
+            )
+        )
+        
+        # Update marker size range to focus on the narrow popularity range (87-95)
+        fig.update_traces(
+            marker=dict(
+                sizemode='area',
+                sizeref=2.*max(songs_df['popularity'])/(40.**2),
+                sizemin=15
             )
         )
         
@@ -227,13 +446,13 @@ def main():
                     yref="y"
                 )
         else:
-            # Add a message in the center of the plot when no songs are selected
+            # Add a creative message in the center of the plot
             fig.add_annotation(
                 x=50,
                 y=50,
-                text="Select songs from the list to visualize them here!",
+                text="Select songs to start your musical journey!",
                 showarrow=False,
-                font=dict(size=16, color="gray"),
+                font=dict(size=16, color="#4B5563"),
                 xref="x",
                 yref="y"
             )
@@ -248,14 +467,27 @@ def main():
         
         # Display the plot
         st.plotly_chart(fig, use_container_width=True)
-    
-    # Always show all songs at the bottom
-    st.markdown("---")
-    st.header("Song Controls")
-    st.write("Click the buttons below to play/pause songs:")
+        
+    # Player controls with creative styling
+    st.markdown("""
+    <style>
+    .custom-header {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 500;
+        color: #1F2937;
+        font-size: 2rem;
+        margin: 2rem 0 1.5rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #7C3AED;
+        width: 100%;
+    }
+    </style>
+    <h2 class="custom-header">Player Controls</h2>
+    """, unsafe_allow_html=True)
+    st.write("Take control of your musical experience")
     
     # Create a grid of buttons for all songs
-    num_cols = 3  # Number of columns in the grid
+    num_cols = 3
     cols = st.columns(num_cols)
     
     for i, (song_id, song) in enumerate(SONGS_DATA.items()):
@@ -268,15 +500,23 @@ def main():
                 toggle_play(song_id)
                 st.rerun()
     
-    # Handle song playback
+    # Handle song playback with custom styling
     if st.session_state.playing_song:
         song = SONGS_DATA[st.session_state.playing_song]
+        st.markdown("""
+        <div style='background: var(--card-background); padding: 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-top: 1rem;'>
+            <p style='margin: 0;'><strong>Now Playing:</strong> {}</p>
+        </div>
+        """.format(song['name']), unsafe_allow_html=True)
         st.audio(song['audio_file'])
     
-    # Data source information
-    st.markdown("---")
-    st.markdown("### Data Source")
-    st.markdown("The song data is from the Kaggle dataset: [Top 50 Spotify Songs - 2019](https://www.kaggle.com/datasets/leonardopena/top50spotify2019)")
+    # Footer with creative styling
+    st.markdown("""
+    <div style='text-align: center; margin-top: 3rem; padding: 2rem; background: var(--card-background); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>
+        <h3 style='color: var(--primary-color); margin-bottom: 1rem;'>About the Data</h3>
+        <p class='info-text'>Song data sourced from the <a href='https://www.kaggle.com/datasets/leonardopena/top50spotify2019' style='color: var(--primary-color); text-decoration: none;'>Top 50 Spotify Songs - 2019</a> dataset</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main() 
