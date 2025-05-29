@@ -14,10 +14,14 @@ st.set_page_config(
 # Add custom CSS for creative design
 st.markdown("""
 <style>
+/* ==================== */
+/* Global Styles      */
+/* ==================== */
+
 /* Import modern fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
 
-/* Modern color scheme */
+/* Modern color scheme (CSS Variables) */
 :root {
     --primary-color: #7C3AED;  /* Vibrant purple */
     --secondary-color: #4F46E5; /* Indigo */
@@ -31,12 +35,82 @@ st.markdown("""
     --gradient-end: #4F46E5;
 }
 
-/* Global styles */
+/* Base font application */
 * {
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Basic body padding/margin */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
     font-family: 'Inter', sans-serif;
 }
 
-/* Creative header styling */
+/* General heading styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-color);
+}
+
+/* Specific H2 override for general style */
+h2 {
+    font-weight: 500;
+}
+
+/* Subtitle styling - more specific to override h2 */
+.center-container h2.subtitle {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    font-family: "Space Grotesk", sans-serif;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+    text-align: center;
+    width: 100%;
+}
+
+/* Info text styling */
+.info-text {
+    color: #6B7280;
+    font-size: 0.9rem;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Focus styles for accessibility */
+button:focus, a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* ==================== */
+/* Header Styles      */
+/* ==================== */
+
+/* Main title styling with gradient and underline */
 h1 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -44,17 +118,18 @@ h1 {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: -0.02em;
     position: relative;
     display: inline-block;
+    padding: 0;
 }
 
+/* Underline for the main title */
 h1::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -1px;
     left: 50%;
     transform: translateX(-50%);
     width: 60%;
@@ -63,44 +138,63 @@ h1::after {
     border-radius: 2px;
 }
 
-h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
-    color: var(--text-color);
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    display: inline-block;
+/* Long horizontal divider line */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
 }
 
-/* Section headers with text-length underlines */
+/* ======================== */
+/* Section Header Styles  */
+/* ======================== */
+
+/* Base section header styling */
 .section-header {
     border-bottom: none;
     position: relative;
     display: inline-block;
 }
 
+/* Underline for section headers */
 .section-header::after {
     content: '';
     position: absolute;
-    bottom: -0.5rem;
+    bottom: 0;
     left: 0;
-    width: 100%;  /* Match text length */
+    width: 100%;
     height: 2px;
     background: var(--primary-color);
     border-radius: 1px;
 }
 
-/* Full-width section header */
-.full-width-header {
-    border-bottom: 2px solid var(--primary-color);
-    border-width: 100%;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    width: 200px;
+/* Custom header styling */
+.custom-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 2rem;
+    margin: 2rem 0 1.5rem 0;
+    width: 100%;
+    position: relative;
 }
 
-/* Card-like containers */
+.custom-header::after {
+    content: '';
+    position: absolute;
+    bottom: -0.1rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 1px;
+}
+
+/* ==================== */
+/* Card & Button Styles */
+/* ==================== */
+
+/* Styling for buttons that look like cards */
 .stButton button {
     width: 100%;
     text-align: left;
@@ -141,6 +235,7 @@ h2 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+/* Styling for selected song item */
 .song-item.selected {
     background-color: var(--selected-color);
     border-left: 4px solid var(--primary-color);
@@ -162,74 +257,57 @@ h2 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Section dividers */
-hr {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-    margin: 2rem 0;
+/* ==================== */
+/* Layout Styles      */
+/* ==================== */
+
+/* Center container */
+.center-container {
+    text-align: center;
 }
 
-/* Info text styling */
-.info-text {
-    color: #6B7280;
-    font-size: 0.9rem;
-    font-style: italic;
+/* Footer styling */
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Focus styles */
-button:focus, a:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+.footer h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
+.footer a {
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
-::-webkit-scrollbar-track {
-    background: var(--background-color);
+/* Now playing container */
+.now-playing {
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 4px;
+.now-playing p {
+    margin: 0;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-}
+/* ==================== */
+/* Utility Classes    */
+/* ==================== */
 
-/* Add this to the CSS section at the top */
-.full-width-underline h2 {
-    border-bottom: 2px solid var(--primary-color);
-    width: 200%;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.player-divider {
-    border: none;
-    height: 2px;
-    background: #7C3AED;
-    margin: 2rem 0 1.5rem 0;
-}
-
+/* Class to remove default h2 border */
 .no-underline h2 {
     border-bottom: none !important;
 }
 
-.custom-header {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
-    color: #1F2937;
-    font-size: 2rem;
-    margin: 2rem 0 1.5rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #7C3AED;
-    width: 100%;
-}
+/* Note: .full-width-underline and .player-divider classes from previous iterations are kept but could be refactored/removed if not used. .custom-header also exists. Review usage in Python code. */
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -307,14 +385,14 @@ def toggle_play(song_id):
 def main():
     # Creative header with gradient
     st.markdown("""
-    <div style='text-align: center; margin-bottom: 2rem; margin-top: 0.5rem;'>
+    <div class="center-container">
         <h1>Music Explorer</h1>
-        <h2 style='font-size: 1.8rem; font-weight: 500; color: var(--text-color); margin-top: 0.5rem; font-family: "Space Grotesk", sans-serif; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.4;'>
-            Discover the emotional landscape of your favorite songs
-        </h2>
+        <h2 class="subtitle">Discover the emotional landscape of your favorite songs</h2>
     </div>
     """, unsafe_allow_html=True)
-    
+
+    st.markdown("""<hr>""", unsafe_allow_html=True)
+
     # Create two columns with custom styling
     col1, col2 = st.columns([1, 2])
     
@@ -470,21 +548,9 @@ def main():
         
     # Player controls with creative styling
     st.markdown("""
-    <style>
-    .custom-header {
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 500;
-        color: #1F2937;
-        font-size: 2rem;
-        margin: 2rem 0 1.5rem 0;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #7C3AED;
-        width: 100%;
-    }
-    </style>
     <h2 class="custom-header">Player Controls</h2>
     """, unsafe_allow_html=True)
-    st.write("Take control of your musical experience")
+    st.markdown("""<p class='info-text'>Take control of your musical experience</p>""", unsafe_allow_html=True)
     
     # Create a grid of buttons for all songs
     num_cols = 3
@@ -504,17 +570,17 @@ def main():
     if st.session_state.playing_song:
         song = SONGS_DATA[st.session_state.playing_song]
         st.markdown("""
-        <div style='background: var(--card-background); padding: 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-top: 1rem;'>
-            <p style='margin: 0;'><strong>Now Playing:</strong> {}</p>
+        <div class="now-playing">
+            <p><strong>Now Playing:</strong> {}</p>
         </div>
         """.format(song['name']), unsafe_allow_html=True)
         st.audio(song['audio_file'])
     
     # Footer with creative styling
     st.markdown("""
-    <div style='text-align: center; margin-top: 3rem; padding: 2rem; background: var(--card-background); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>
-        <h3 style='color: var(--primary-color); margin-bottom: 1rem;'>About the Data</h3>
-        <p class='info-text'>Song data sourced from the <a href='https://www.kaggle.com/datasets/leonardopena/top50spotify2019' style='color: var(--primary-color); text-decoration: none;'>Top 50 Spotify Songs - 2019</a> dataset</p>
+    <div class="footer">
+        <h3>About the Data</h3>
+        <p class='info-text'>Song data sourced from the <a href='https://www.kaggle.com/datasets/leonardopena/top50spotify2019'>Top 50 Spotify Songs - 2019</a> dataset</p>
     </div>
     """, unsafe_allow_html=True)
 
